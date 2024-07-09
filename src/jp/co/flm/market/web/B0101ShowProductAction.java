@@ -2,14 +2,9 @@ package jp.co.flm.market.web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import jp.co.flm.market.common.MarketBusinessException;
 import jp.co.flm.market.common.MarketSystemException;
-import jp.co.flm.market.entity.Category;
-import jp.co.flm.market.entity.Stock;
 import jp.co.flm.market.entity.Product;
-import jp.co.flm.market.logic.MemberInfoLogic;
 import jp.co.flm.market.logic.ShowProductLogic;
 /**
  * 商品詳細照会画面へ遷移するアクションクラスです。
@@ -38,13 +33,6 @@ public class B0101ShowProductAction {
                 // 購入履歴情報をリクエストスコープへ格納する。
                 req.setAttribute("product", product);
 
-
-                if (stock == 0) {
-                    // 購入履歴情報がなかった場合、メッセージをリクエストスコープへ格納する。
-                    req.setAttribute("message", "商品" + product.getProductName() + " は在庫切れです。");
-                }
-
-                page = "member-info-view.jsp";
             } catch (MarketBusinessException e) {
                 // エラーメッセージを取得する。
                 String errorMessage = e.getMessage();
@@ -54,7 +42,7 @@ public class B0101ShowProductAction {
                 errorMessageList.add(errorMessage);
                 req.setAttribute("errorMessageList", errorMessageList);
 
-                page = "member-login-view.jsp";
+                page = "product-detail-view.jsp";
             } catch (MarketSystemException e) {
                 // エラーメッセージを取得する。
                 String errorMessage = e.getMessage();
@@ -66,11 +54,7 @@ public class B0101ShowProductAction {
 
                 page = "error.jsp";
             }
-        }
-
         return page;
     }
 }
 
-
-}

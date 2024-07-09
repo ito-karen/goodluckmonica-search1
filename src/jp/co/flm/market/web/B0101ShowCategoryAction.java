@@ -2,7 +2,6 @@ package jp.co.flm.market.web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.common.MarketBusinessException;
 import jp.co.flm.market.entity.Product;
@@ -14,12 +13,19 @@ import jp.co.flm.market.logic.ShowProductLogic;
  * @version 1.0 YYYY/MM/DD
  */
 public class B0101ShowCategoryAction {
+    /**
+     * アクションを実行する。
+     *
+     * @param req
+     *            HttpServletRequest
+     * @return 次画面のJSP名
+     */
     /*public void checkSession(HttpServletRequest req) {
         // セッションを取得する。
         req.getSession(false);
     }*/
 
-    public String execute(HttpServletRequest request) {
+    public String execute(HttpServletRequest req) {
         String page = null;
 
         try {
@@ -30,19 +36,30 @@ public class B0101ShowCategoryAction {
             ArrayList<Product> productlist = logic.showCategory(categoryId);
 
         // 検索結果をリクエストスコープに設定する。
-        request.setAttribute("productlist", productlist);
+        req.setAttribute("productlist", productlist);
 
         // 結果画面を戻り値に設定する。
         page = "/product-result-view.jsp";
 
         } catch(MarketBusinessException e) {
-            e.printStackTrace();
-            request.setAttribute("message", e.getMessage());
+            // エラーメッセージを取得する。
+            String errorMessage = e.getMessage();
+
+            // リクエストスコープへエラーメッセージを格納する。
+            ArrayList<String> errorMessageList = new ArrayList<String>();
+            errorMessageList.add(errorMessage);
+            req.setAttribute("errorMessageList", errorMessageList);
+
+            page = "product-result-view.jsp";
         } catch(MarketSystemException e) {
-            e.printStackTrace();
-            request.setAttribute("message", e.getMessage());
-        // システムエラー画面を戻り値に設定する。
-            page = "/error.jsp";
+         // エラーメッセージを取得する。
+            String errorMessage = e.getMessage();
+
+            // リクエストスコープへエラーメッセージを格納する。
+            ArrayList<String> errorMessageList = new ArrayList<String>();
+            errorMessageList.add(errorMessage);
+            req.setAttribute("errorMessageList", errorMessageList);
+            page = "error.jsp";
         }
         return page;
 

@@ -58,7 +58,7 @@ public class ShowProductLogic {
         return productlist;
         }
 
-    public Product showProduct(String productId) throws MarketSystemException {
+    public Product showProduct(String productId) throws MarketSystemException, MarketBusinessException {
         Connection con = null;
         Product product = null;
 
@@ -76,6 +76,7 @@ public class ShowProductLogic {
                     throw new MarketBusinessException("商品" + product.getProductName() + " は在庫切れです。");
                 }
             }
+        }
         catch(SQLException e) {
             e.printStackTrace();
             throw new MarketSystemException("システムエラーが発生しました。システム管理者に連絡してください。");
