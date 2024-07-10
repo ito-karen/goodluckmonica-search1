@@ -69,20 +69,28 @@ public class FrontControllerServlet extends HttpServlet {
         }
         switch (flag) {
             case "TOP":
-                CommonAction commonAction = new CommonAction();
-                page = commonAction.execute(request);
+                CommonShowTopPageAction commonShowTopPageAction = new CommonShowTopPageAction();
+                page = commonShowTopPageAction.execute(request);
                 break;
             case "CommonLogin":
                 CommonLoginAction commonLoginAction = new CommonLoginAction();
                 page = commonLoginAction.execute(request);
                 break;
             case "B0101ShowCategory":
-                B0101ShowCategoryAction showCategoryAction = new B0101ShowCategoryAction();
+                B0101ShowCategoryAction b0101ShowCategoryAction = new B0101ShowCategoryAction();
                 page = b0101ShowCategoryAction.execute(request);
                 break;
             case "B0101ShowProduct":
-                B0101ShowProductAction showProductAction = new B0101ShowProductAction();
+                B0101ShowProductAction b0101ShowProductAction = new B0101ShowProductAction();
                 page = b0101ShowProductAction.execute(request);
+                break;
+            case "B0101LogOut":
+                B0101LogOutAction b0101LogOutAction = new B0101LogOutAction();
+                page = b0101LogOutAction.execute(request);
+                break;
+            case "B0101AddToCart":
+                B0101AddToCartAction b0101AddToCartAction = new B0101AddToCartAction();
+                page = b0101AddToCartAction.execute(request);
                 break;
             case "B0102UpdateCart":
                 B0102UpdateCartAction b0102UpdateCartAction = new B0102UpdateCartAction();
@@ -97,9 +105,9 @@ public class FrontControllerServlet extends HttpServlet {
                 page = b0102GoShoppingAction.execute(request);
                 break;
             case "B0102LoginShopping":
-                // B0102LoginShoppingAction b0102LoginShoppingAction = new
-                // B0102LoginShoppingAction();
-                // page = b0102LoginShoppingAction.execute(request);
+                B0102LoginShoppingAction b0102LoginShoppingAction = new
+                B0102LoginShoppingAction();
+                page = b0102LoginShoppingAction.execute(request);
                 break;
             case "B0202LoginMember":
                 B0202LoginMemberAction b0202LoginMemberAction = new B0202LoginMemberAction();

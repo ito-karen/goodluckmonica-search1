@@ -7,8 +7,6 @@ import jp.co.flm.market.common.MarketBusinessException;
 import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.dao.ConnectionManager;
 import jp.co.flm.market.dao.ProductDAO;
-//import jp.co.flm.market.entity.Category;
-//import jp.co.flm.market.entity.Stock;
 import jp.co.flm.market.entity.Product;
 
 public class ShowProductLogic {
@@ -24,7 +22,7 @@ public class ShowProductLogic {
      *             本システムのシステム例外
      * @throws MarketBusinessException
      */
-    public ArrayList<Product> showCategory(String categoryId) throws MarketSystemException, MarketBusinessException {
+    public ArrayList<Product> showCategory(String categoryId) throws MarketSystemException {
         Connection con = null;
         ArrayList<Product> productlist = null;
 
@@ -35,15 +33,11 @@ public class ShowProductLogic {
          ProductDAO productDAO = new ProductDAO(con);
          productlist = productDAO.showCategory(categoryId);
 
-         //在庫がなかった場合、メッセージを格納
-         if (productlist.size() > 0) {
-             int stock = productlist.get(0).getStock().getQuantity(); // 在庫を取得
-             if (stock == 0) {
-                 throw new MarketBusinessException("商品" + productlist.get(0).getProductName() + "は在庫切れです。");
-             }
+         //カテゴリー内の商品がゼロの場合
+         if (productlist.size() == 0) {
+             throw new MarketSystemException("検索条件に該当する商品はありません。");
          }
          }catch(SQLException e) {
-            e.printStackTrace();
             throw new MarketSystemException("システムエラーが発生しました。システム管理者に連絡してください。");
         }finally {
             try {
@@ -51,14 +45,13 @@ public class ShowProductLogic {
                     con.close();
                     }
                 } catch(SQLException e) {
-                    e.printStackTrace();
                     throw new MarketSystemException("システムエラーが発生しました。システム管理者に連絡してください。");
                     }
             }
         return productlist;
         }
 
-    public Product showProduct(String productId) throws MarketSystemException, MarketBusinessException {
+    public Product showProduct(String productId) throws MarketSystemException {
         Connection con = null;
         Product product = null;
 
@@ -68,17 +61,12 @@ public class ShowProductLogic {
             //テーブルアクセス用のDAOを生成し、メソッドを呼び出す
             ProductDAO productDAO = new ProductDAO(con);
             product = productDAO.showProduct(productId);
-
-          //在庫がなかった場合、メッセージを格納
-            if (product != null) {
-                int stock = product.getStock().getQuantity(); // 在庫を取得
-                if (stock == 0) {
-                    throw new MarketBusinessException("商品" + product.getProductName() + " は在庫切れです。");
-                }
+          //商品情報がゼロの場合
+            if (product == null) {
+                throw new MarketSystemException("詳細情報はありません。");
             }
         }
         catch(SQLException e) {
-            e.printStackTrace();
             throw new MarketSystemException("システムエラーが発生しました。システム管理者に連絡してください。");
         }finally {
             try {
@@ -86,7 +74,6 @@ public class ShowProductLogic {
                     con.close();
                     }
                 } catch(SQLException e) {
-                    e.printStackTrace();
                     throw new MarketSystemException("システムエラーが発生しました。システム管理者に連絡してください。");
                     }
             }

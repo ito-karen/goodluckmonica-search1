@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import jp.co.flm.market.common.MarketSystemException;
-import jp.co.flm.market.common.MarketBusinessException;
 import jp.co.flm.market.entity.Product;
 import jp.co.flm.market.logic.ShowProductLogic;
 /**
@@ -20,10 +19,6 @@ public class B0101ShowCategoryAction {
      *            HttpServletRequest
      * @return 次画面のJSP名
      */
-    /*public void checkSession(HttpServletRequest req) {
-        // セッションを取得する。
-        req.getSession(false);
-    }*/
 
     public String execute(HttpServletRequest req) {
         String page = null;
@@ -41,16 +36,6 @@ public class B0101ShowCategoryAction {
         // 結果画面を戻り値に設定する。
         page = "/product-result-view.jsp";
 
-        } catch(MarketBusinessException e) {
-            // エラーメッセージを取得する。
-            String errorMessage = e.getMessage();
-
-            // リクエストスコープへエラーメッセージを格納する。
-            ArrayList<String> errorMessageList = new ArrayList<String>();
-            errorMessageList.add(errorMessage);
-            req.setAttribute("errorMessageList", errorMessageList);
-
-            page = "product-result-view.jsp";
         } catch(MarketSystemException e) {
          // エラーメッセージを取得する。
             String errorMessage = e.getMessage();

@@ -2,7 +2,6 @@ package jp.co.flm.market.web;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import jp.co.flm.market.common.MarketBusinessException;
 import jp.co.flm.market.common.MarketSystemException;
 import jp.co.flm.market.entity.Product;
 import jp.co.flm.market.logic.ShowProductLogic;
@@ -32,17 +31,8 @@ public class B0101ShowProductAction {
 
                 // 購入履歴情報をリクエストスコープへ格納する。
                 req.setAttribute("product", product);
-
-            } catch (MarketBusinessException e) {
-                // エラーメッセージを取得する。
-                String errorMessage = e.getMessage();
-
-                // リクエストスコープへエラーメッセージを格納する。
-                ArrayList<String> errorMessageList = new ArrayList<String>();
-                errorMessageList.add(errorMessage);
-                req.setAttribute("errorMessageList", errorMessageList);
-
                 page = "product-detail-view.jsp";
+
             } catch (MarketSystemException e) {
                 // エラーメッセージを取得する。
                 String errorMessage = e.getMessage();
