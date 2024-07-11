@@ -20,6 +20,9 @@
 		</div>
 
 		<c:if test="${!empty productlist}">
+						<p>
+					<input type="hidden" name="flag" value="">
+				</p>
 			<h2>検索結果 <c:out value="${productlist.size()}" />件</h2>
 			<form method="get" action="${pageContext.request.contextPath}/mserv">
 				<table border="1" id="product.list"><%--qq isso --%>
@@ -37,7 +40,9 @@
                 <td><c:out value="${product.productName}" /></td>
                 <td><c:out value="${product.price}" />円</td>
                 <td><c:out value="${product.stock.quantity}" />個</td>
-                <td><a href="product-detail-view.jsp?productId=<c:out value="${product.productId}" />">詳細を見る</a></td>
+                <td><a
+                href='${pageContext.request.contextPath}/mserv?flag=B0101ShowProduct&productId=<c:out value="${product.productId}"/>'>
+                詳細を見る</a></td>
                 <td><input type="submit" value="カートに入れる"
 						onclick="this.form.flag.value='B0101AddToCart'">
 				</td>

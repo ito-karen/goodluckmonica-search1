@@ -40,14 +40,17 @@
 		<h1>商品検索</h1>
 
 		<%-- contents start --%>
-
-<c:forEach var="category" items="${categoryList}">
-        <a href="B0101ShowCategoryAction?categoryId=${category.categoryId}">
+		<p>
+			<input type="hidden" name="flag" value="">
+		</p>
+		<c:if test="${not empty categoryList}">
+		<c:forEach var="category" items="${categoryList}">
+        <a href='${pageContext.request.contextPath}/mserv?flag=TOP&categoryId=
+        <c:out value="${category.categoryId}"/>'>
             <img src="${category.picture}" alt="${category.categoryName}" width="100" height="100">
-            <br>
-            <span>${category.categoryName}</span>
         </a>
     </c:forEach>
+    </c:if>
 	</div>
 		<%-- contents end --%>
 	<div id="footerArea">
