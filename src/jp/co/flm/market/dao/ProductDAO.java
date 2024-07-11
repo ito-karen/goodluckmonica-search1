@@ -58,7 +58,7 @@ public class ProductDAO {
             + "ON product.categoryid = category.categoryid "
             + "INNER JOIN stock "
             + "ON product.productid =stock.productid "
-            + "WHERE categoryid=? ";
+            + "WHERE product.categoryid=? ";
         ResultSet res = null;
         PreparedStatement stmt = null;
 
@@ -121,7 +121,7 @@ public class ProductDAO {
             + "ON product.categoryid = category.categoryid "
             + "INNER JOIN stock "
             + "ON product.productid =stock.productid "
-            + "WHERE productid=? ";
+            + "WHERE product.productid=? ";
         PreparedStatement stmt = null;
         ResultSet res = null;
 

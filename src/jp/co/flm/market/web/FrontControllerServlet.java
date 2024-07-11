@@ -76,6 +76,10 @@ public class FrontControllerServlet extends HttpServlet {
                 CommonLoginAction commonLoginAction = new CommonLoginAction();
                 page = commonLoginAction.execute(request);
                 break;
+            case "CommonViewCart":
+                CommonViewCartAction commonViewCartAction = new CommonViewCartAction();
+                page = commonViewCartAction.execute(request);
+                break;
             case "B0101ShowCategory":
                 B0101ShowCategoryAction b0101ShowCategoryAction = new B0101ShowCategoryAction();
                 page = b0101ShowCategoryAction.execute(request);
@@ -104,14 +108,17 @@ public class FrontControllerServlet extends HttpServlet {
                 B0102GoShoppingAction b0102GoShoppingAction = new B0102GoShoppingAction();
                 page = b0102GoShoppingAction.execute(request);
                 break;
-            case "B0102LoginShopping":
-                B0102LoginShoppingAction b0102LoginShoppingAction = new
-                B0102LoginShoppingAction();
+            /*case "B0102LoginShopping":
+                B0102LoginShoppingAction b0102LoginShoppingAction = new B0102LoginShoppingAction();
                 page = b0102LoginShoppingAction.execute(request);
-                break;
+                break;*/
             case "B0202LoginMember":
                 B0202LoginMemberAction b0202LoginMemberAction = new B0202LoginMemberAction();
                 page = b0202LoginMemberAction.execute(request);
+                break;
+            case "B0201CheckEmailAction":
+                B0201CheckEmailAction b0201CheckEmailAction = new B0201CheckEmailAction();
+                page = b0201CheckEmailAction.execute(request);
                 break;
             default:
                 // エラーメッセージを取得する。
