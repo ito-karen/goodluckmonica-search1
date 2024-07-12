@@ -133,7 +133,7 @@ public class ProductDAO {
             if (res.next()) {
                 // 商品情報を作成する。
                 product = new Product();
-                product.setProductId(res.getString("picture"));
+                product.setPicture(res.getString("picture"));
                 product.setProductId(res.getString("productid"));
                 product.setProductName(res.getString("productname"));
                 product.setPrice(res.getInt("price"));

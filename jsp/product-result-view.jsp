@@ -43,8 +43,12 @@
                 <td><a
                 href='${pageContext.request.contextPath}/mserv?flag=B0101ShowProduct&productId=<c:out value="${product.productId}"/>'>
                 詳細を見る</a></td>
-                <td><input type="submit" value="カートに入れる"
-						onclick="this.form.flag.value='B0101AddToCart'">
+                <td><input type="submit" value="カートに入れる"onclick="this.form.flag.value='B0101AddToCart'">
+                <%-- <input type="submit" value="カートに入れる"
+						onclick="this.form.flag.value='B0101AddToCart&productId=<c:out value="${product.productId}"/>'">--%>
+						<%--<input type="submit" value="カートに入れる" onclick="this.form.flag.value='B0101AddToCart&productId=' + '${product.productId}'">--%>
+				<td>
+				<%--<a href='${pageContext.request.contextPath}/mserv?flag=B0101AddToCart&productId=<c:out value="${product.productId}"/>'>カートに入れる</a>--%>
 				</td>
             </tr>
         </c:forEach>
@@ -56,7 +60,7 @@
 		</p>
 		<%-- contents end --%>
 	</div>
-	<div id="footerArea">
+	<div id="footerArea"style="clear: both; margin-top: 20px;">
 		<small> Copyright YYYY FUJITSU LEARNING MEDIA LIMITED </small>
 	</div>
 </body>
